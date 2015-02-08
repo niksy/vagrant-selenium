@@ -17,13 +17,14 @@ sudo npm install -g npm
 sudo npm install -g selenium-standalone
 sudo selenium-standalone install
 
-# Install startup scripts
+# Add Selenium startup alias
 SELENIUM_ALIAS=$(cat <<EOF
 alias selenium='sudo selenium-standalone start'
 EOF
 )
 echo "${SELENIUM_ALIAS}" >> .bashrc
 
+# Run xterm on startup
 STARTUP_SCRIPT=$(cat <<EOF
 #!/bin/sh
 xterm &
@@ -31,3 +32,6 @@ EOF
 )
 echo "${STARTUP_SCRIPT}" > /etc/X11/Xsession.d/9999-common_start
 chmod +x /etc/X11/Xsession.d/9999-common_start
+
+# Reboot machine
+sudo reboot
